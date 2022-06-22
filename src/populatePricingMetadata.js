@@ -1,29 +1,15 @@
-
-const openqPolygonMetadata = require("./constants/openq-polygon-mainnet-indexable.json");
-const openqLocalMetadata = require("./constants/openq-local-indexable.json");
 const polygonMetadata = require("./constants/polygon-mainnet-indexable.json");
 const { getAddress } = require('@ethersproject/address');
 
-
-const newMetadata = (filteredBounties, environment) => {
+const populatePricingMetadata = (filteredBounties, environment) => {
 	const pricingMetadata = [];
-	let openQMetadata = [];
+	let openQMetadata = getMetadata(environment);
 	filteredBounties.forEach((bounty) => {
-		switch (environment) {
-			case 'local':
-				openQMetadata = openqLocalMetadata;
-				break;
-			case 'production':
-			case 'staging':
-				openQMetadata = openqPolygonMetadata;
-		}
 		bounty.bountyTokenBalances.forEach((bountyTokenBalance) => {
 			const checksummedAddress = getAddress(bountyTokenBalance.tokenAddress);
 			const metadataByChecksum = openQMetadata[checksummedAddress];
 			const lowerCaseAddress = bountyTokenBalance.tokenAddress.toLowerCase();
-			const metadataByLowerCase = polygonMetadata[
-				lowerCaseAddress
-			];
+			const metadataByLowerCase = polygonMetadata[lowerCaseAddress];
 			const notPresentInMetadataAndInOpenQData = !pricingMetadata.includes(bountyTokenBalance.tokenAddress);
 			if (notPresentInMetadataAndInOpenQData && metadataByChecksum) {
 				pricingMetadata.push(
@@ -40,4 +26,4 @@ const newMetadata = (filteredBounties, environment) => {
 	return pricingMetadata;
 };
 
-module.exports = newMetadata;
+module.exports = populatePricingMetadata;

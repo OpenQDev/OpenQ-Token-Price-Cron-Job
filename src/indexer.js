@@ -10,8 +10,6 @@ const tokenMetadata = require('./constants/local.json');
 const polygonMetadata = require('./constants/polygon-mainnet-indexable.json');
 const openQLocalTokens = require('./constants/openq-local-enumerable.json');
 
-const fetchBounties = require('./fetchBounties');
-
 require('dotenv').config();
 
 const updateTvls = async (values) => {
