@@ -1,15 +1,18 @@
-const getBounties = require("./getBounties")
+const getBounties = require("./getBounties");
+const filterNonIssues = require('./utils/filterNonIssues');
 
 // Same as in OpenQSubgraphClient
 const fetchBounties = async () => {
 	const bounties = [];
 	const pricingMetadata = [];
 
-	
+
 
 	// Recursive function in case we need multiple pages of bounties.
 	const getAllBounties = async () => {
 		const batch = await getBounties('asc', 0, 100);
+		// Filter out any GitHub Id's that are not Issues (e.g. Pull Requests)
+		const filteredBounties = filterNonIssues(batch);
 
 		batch.forEach((bounty) => {
 			bounty.bountyTokenBalances.forEach((bountyTokenBalance) => {

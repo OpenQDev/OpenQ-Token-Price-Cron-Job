@@ -19,10 +19,7 @@ const getBounties = async (sortOrder, startAt, quantity) => {
 			} catch (error) {
 				reject(e);
 			}
-
-			// Filter out any GitHub Id's that are not Issues (e.g. Pull Requests)
-			const filteredBounties = filterNonIssues(result.data.bounties);
-			resolve(filteredBounties);
+			resolve(result.data.bounties);
 		} catch (e) {
 			reject(e);
 		}
