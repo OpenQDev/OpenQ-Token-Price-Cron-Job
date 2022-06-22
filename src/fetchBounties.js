@@ -1,52 +1,17 @@
 const getBounties = require("./getBounties");
+const getAllBounties = require("./getAllBounties");
 const filterNonIssues = require('./utils/filterNonIssues');
-
+const openqPolygonMetadata = require("./constants/openq-polygon-mainnet-indexable.json");
+const openqLocalMetadata = require("./constants/openq-local-indexable.json");
+const polygonMetadata = require("./constants/polygon-mainnet-indexable.json");
+const populatePricingMetadata = require("./populatePricingMetadata");
 // Same as in OpenQSubgraphClient
 const fetchBounties = async () => {
-	const bounties = [];
-	const pricingMetadata = [];
 
 
 
 	// Recursive function in case we need multiple pages of bounties.
-	const getAllBounties = async () => {
-		const batch = await getBounties('asc', 0, 100);
-		// Filter out any GitHub Id's that are not Issues (e.g. Pull Requests)
-		const filteredBounties = filterNonIssues(batch);
-
-		batch.forEach((bounty) => {
-			bounty.bountyTokenBalances.forEach((bountyTokenBalance) => {
-				const foo = !pricingMetadata.includes(bountyTokenBalance.tokenAddress) && tokenMetadata[getAddress(bountyTokenBalance.tokenAddress)];
-				if (foo) {
-					pricingMetadata.push(
-						tokenMetadata[
-						getAddress(
-							bountyTokenBalance.tokenAddress
-						)
-						]
-					);
-				} else if (
-					polygonMetadata[
-					bountyTokenBalance.tokenAddress.toLowerCase()
-					]
-				) {
-					pricingMetadata.push(
-						polygonMetadata[
-						bountyTokenBalance.tokenAddress.toLowerCase()
-						]
-					);
-				}
-			});
-		});
-
-		bounties.push(...batch);
-
-		if (batch === 100) {
-			await getAllBounties();
-		}
-	};
-
-	await getAllBounties();
+	const { pricingMetadata, bounties } = await getAllBounties([], []);
 
 	// Get token values
 	const network = 'polygon-pos';

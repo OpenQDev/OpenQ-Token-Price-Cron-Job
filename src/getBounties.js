@@ -1,7 +1,5 @@
 const getBounties = async (sortOrder, startAt, quantity) => {
 	const promise = new Promise(async (resolve, reject) => {
-		try {
-			let result = null;
 			try {
 				result = await axios
 					.post(
@@ -16,12 +14,10 @@ const getBounties = async (sortOrder, startAt, quantity) => {
 							},
 						}
 					);
-			} catch (error) {
-				reject(e);
-			}
 			resolve(result.data.bounties);
 		} catch (e) {
-			reject(e);
+		console.error(e)
+			resolve([])
 		}
 		resolve([]);
 	});
