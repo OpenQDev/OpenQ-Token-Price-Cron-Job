@@ -6,7 +6,7 @@ function sleep(ms) {
 
 const runIndexer = async () => {
 	console.log('init, waiting');
-	await sleep(1000);
+	await sleep(3000);
 	console.log('running');
 	await indexer();
 	console.log('completed');

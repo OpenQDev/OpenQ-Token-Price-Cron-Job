@@ -125,6 +125,7 @@ const fetchBounties = async () => {
 	});
 	return tvls;
 };
+
 const updateTvls = async (values) => {
 	const pending = [];
 	for (let i = 0; i < values.length; i += 1) {
@@ -156,7 +157,6 @@ const updateTvls = async (values) => {
 	}
 	return Promise.all(pending);
 };
-
 
 const indexer = async () => {
 	const firstTen = openQLocalTokens.slice(0, 11).map(elem => elem.address).concat('0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270');
