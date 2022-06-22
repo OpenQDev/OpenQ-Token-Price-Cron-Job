@@ -1,6 +1,4 @@
-const { gql } = require('@apollo/client');
-
-const UPDATE_BOUNTY = gql`
+const UPDATE_BOUNTY = `
 	mutation Mutation(
 		$address: String!
 		$tvl: Float!

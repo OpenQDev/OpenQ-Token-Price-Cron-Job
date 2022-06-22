@@ -1,46 +1,40 @@
 const axios = require('axios');
-const fetch = require('cross-fetch');
 const { getAddress } = require('@ethersproject/address');
-const { ApolloClient, InMemoryCache, HttpLink } = require('@apollo/client');
 
 const UPDATE_BOUNTY = require('./graphql/updateBounty');
 const CREATE_PRICES = require('./graphql/createPrices');
 const GET_ALL_BOUNTIES = require('./graphql/getAllBounties');
 const UPDATE_PRICES = require('./graphql/updatePrices');
+
 const tokenMetadata = require('./constants/local.json');
 const polygonMetadata = require('./constants/polygon-mainnet-indexable.json');
 const openQLocalTokens = require('./constants/openq-local-enumerable.json');
 
-const tvlClient = new ApolloClient({
-	cache: new InMemoryCache(),
-	link: new HttpLink({
-		fetch,
-		uri: `${process.env.OPENQ_API_URL}`,
-	}),
-});
-
-const subGraphClient = new ApolloClient({
-	cache: new InMemoryCache(),
-	link: new HttpLink({
-		fetch,
-		uri: `${process.env.OPENQ_SUBGRAPH_HTTP_URL}`,
-		defaultOptions: {
-			query: {
-				fetchPolicy: 'no-cache',
-			},
-		},
-	}),
-});
+require('dotenv').config();
 
 // Same as in OpenQSubgraphClient
 const fetchBounties = async () => {
 	const getBounties = async (sortOrder, startAt, quantity) => {
 		try {
-			const result = await subGraphClient.query({
-				query: GET_ALL_BOUNTIES,
-				fetchPolicy: 'no-cache',
-				variables: { skip: startAt, sortOrder, quantity },
-			});
+			let result = null;
+			try {
+				result = await axios
+					.post(
+						`${process.env.OPENQ_SUBGRAPH_HTTP_URL}/graphql`,
+						{
+							query: GET_ALL_BOUNTIES,
+							variables: { skip: startAt, sortOrder, quantity }
+						},
+						{
+							headers: {
+								'Authorization': process.env.OPENQ_API_SECRET,
+							},
+						}
+					);
+			} catch (error) {
+				console.error(error);
+			}
+
 			return result.data.bounties.filter(
 				(bounty) =>
 					bounty.bountyId.slice(0, 1) === 'I' ||
@@ -138,11 +132,27 @@ const updateTvls = async (values) => {
 		const address = getAddress(value.address);
 		const tvl = parseFloat(value.tvl);
 		const { organizationId } = value;
-		const result = tvlClient.mutate({
-			mutation: UPDATE_BOUNTY,
-			variables: { address, tvl, organizationId },
-		});
-		pending.push(result);
+
+		let result = null;
+		try {
+			result = await axios
+				.post(
+					`${process.env.OPENQ_API_URL}/graphql`,
+					{
+						query: UPDATE_BOUNTY,
+						variables: { address, tvl, organizationId },
+					},
+					{
+						headers: {
+							'Authorization': process.env.OPENQ_API_SECRET,
+						},
+					}
+				);
+		} catch (error) {
+			console.error(error);
+		}
+
+		pending.push(result.data);
 	}
 	return Promise.all(pending);
 };
@@ -154,16 +164,46 @@ const indexer = async () => {
 	const stringifiedTokens = firstTen.join(',');
 	const firstTenPrices = await axios.get(`https://api.coingecko.com/api/v3/simple/token_price/${network}?contract_addresses=${stringifiedTokens}&vs_currencies=usd`);
 
-	const updated = await tvlClient.mutate({
-		mutation: UPDATE_PRICES,
-		variables: { priceObj: firstTenPrices.data }
-	});
+	let updated = null;
+	try {
+		updated = await axios
+			.post(
+				`${process.env.OPENQ_API_URL}/graphql`,
+				{
+					query: UPDATE_PRICES,
+					variables: { priceObj: firstTenPrices.data }
+				},
+				{
+					headers: {
+						'Authorization': process.env.OPENQ_API_SECRET,
+					},
+				}
+			);
+	} catch (error) {
+		console.error(error);
+	}
+
 	if (updated.data.updatePrices.count === 0) {
 
-		await tvlClient.mutate({
-			mutation: CREATE_PRICES,
-			variables: { priceObj: firstTenPrices.data }
-		});
+		let updated = null;
+		try {
+			updated = await axios
+				.post(
+					`${process.env.OPENQ_API_URL}/graphql`,
+					{
+						query: CREATE_PRICES,
+						variables: { priceObj: firstTenPrices.data }
+					},
+					{
+						headers: {
+							'Authorization': process.env.OPENQ_API_SECRET,
+						},
+					}
+				);
+		} catch (error) {
+			console.error(error);
+		}
+
 	}
 
 	try {

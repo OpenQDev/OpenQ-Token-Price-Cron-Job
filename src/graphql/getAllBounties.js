@@ -1,6 +1,4 @@
-const { gql } = require('@apollo/client');
-
-const GET_ALL_BOUNTIES = gql`
+const GET_ALL_BOUNTIES = `
 	query GetAllIssues($sortOrder: String!, $skip: Int!, $quantity: Int!) {
 		bounties(skip: $skip, sortOrder: $sortOrder, quantity: $quantity) {
 			bountyAddress
@@ -15,4 +13,5 @@ const GET_ALL_BOUNTIES = gql`
 		}
 	}
 `;
+
 module.exports = GET_ALL_BOUNTIES;

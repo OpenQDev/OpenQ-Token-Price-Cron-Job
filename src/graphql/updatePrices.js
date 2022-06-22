@@ -1,10 +1,9 @@
-const { gql } = require('@apollo/client');
-
-const UPDATE_PRICES = gql`
+const UPDATE_PRICES = `
 	mutation Mutation($priceObj: JSON) {
-  updatePrices(priceObj: $priceObj) {
-    count
-  }
-}
+		updatePrices(priceObj: $priceObj) {
+			count
+		}
+	}
 `;
+
 module.exports = UPDATE_PRICES;
