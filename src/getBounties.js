@@ -1,5 +1,5 @@
 const getBounties = async (sortOrder, startAt, quantity) => {
-const promise = new Promise(async(resolve, reject)=>{
+	const promise = new Promise(async (resolve, reject) => {
 		try {
 			let result = null;
 			try {
@@ -17,21 +17,18 @@ const promise = new Promise(async(resolve, reject)=>{
 						}
 					);
 			} catch (error) {
-				reject(e)
+				reject(e);
 			}
 
-			resolve(result.data.bounties.filter(
-				(bounty) =>
-					bounty.bountyId.slice(0, 1) === 'I' ||
-					bounty.bountyId.slice(0, 1) === 'M'
-			));
+			// Filter out any GitHub Id's that are not Issues (e.g. Pull Requests)
+			const filteredBounties = filterNonIssues(result.data.bounties);
+			resolve(filteredBounties);
 		} catch (e) {
-			reject(e)
+			reject(e);
 		}
 		resolve([]);
-})
-return promise;
-	};
+	});
+	return promise;
+};
 
-
-module.exports
+module.exports = getBounties;
