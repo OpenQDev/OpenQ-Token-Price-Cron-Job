@@ -13,7 +13,7 @@ const getMetadata = require('./utils/getMetadata');
 const getTokenValues = async (bounties, pricingMetadata, data, environment) => {
 	const tokenMetadata = getMetadata(environment);
 	const tvls = bounties.map((bounty) => {
-		const tvl = calculateTvl(bounty, tokenMetadata);
+		const tvl = calculateTvl(bounty, tokenMetadata, data);
 		return {
 			address: bounty.bountyAddress,
 			tvl,
