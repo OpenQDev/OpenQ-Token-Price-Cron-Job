@@ -1,7 +1,10 @@
-const updateTvls = async (values) => {
+const { getAddress } = require('@ethersproject/address');
+const axios = require('axios');
+
+const updateTvls = async (tvlBodies) => {
 	const pending = [];
-	for (let i = 0; i < values.length; i += 1) {
-		const value = values[i];
+	for (let i = 0; i < tvlBodies.length; i += 1) {
+		const value = tvlBodies[i];
 		const address = getAddress(value.address);
 		const tvl = parseFloat(value.tvl);
 		const { organizationId } = value;
@@ -24,7 +27,6 @@ const updateTvls = async (values) => {
 		} catch (error) {
 			console.error(error);
 		}
-
 		pending.push(result.data);
 	}
 	return Promise.all(pending);

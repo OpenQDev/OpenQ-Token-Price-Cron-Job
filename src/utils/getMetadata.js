@@ -1,5 +1,5 @@
-const openqPolygonMetadata = require("./constants/openq-polygon-mainnet-indexable.json");
-const openqLocalMetadata = require("./constants/openq-local-indexable.json");
+const openqPolygonMetadata = require("../constants/openq-polygon-mainnet-indexable.json");
+const openqLocalMetadata = require("../constants/openq-local-indexable.json");
 
 const getMetadata = (environment) => {
 	switch (environment) {

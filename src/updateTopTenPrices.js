@@ -1,9 +1,11 @@
 const axios = require('axios');
 require('dotenv').config();
 
+const UPDATE_PRICES = require('./graphql/updatePrices');
+
 const openQLocalTokens = require('./constants/openq-local-enumerable.json');
 
-const updateFirstTenPrices = (openQLocalTokens) => {
+const updateFirstTenPrices = () => {
 	return new Promise(async (resolve, reject) => {
 		const firstTen = openQLocalTokens.slice(0, 11).map(elem => elem.address).concat('0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270');
 		const network = 'polygon-pos';
@@ -54,3 +56,5 @@ const updateFirstTenPrices = (openQLocalTokens) => {
 		}
 	});
 };
+
+module.exports = updateFirstTenPrices;

@@ -9,7 +9,7 @@ const UPDATE_PRICES = require('./graphql/updatePrices');
 const tokenMetadata = require('./constants/local.json');
 const polygonMetadata = require('./constants/polygon-mainnet-indexable.json');
 
-const updateFirstTenPrices = require('./updateFirstTenPrices');
+const updateTopTenPrices = require('./updateTopTenPrices');
 const fetchTvls = require('./fetchTvls');
 const updateTvls = require('./updateTvls');
 
@@ -17,7 +17,7 @@ require('dotenv').config();
 
 const indexer = async () => {
 	try {
-		await updateFirstTenPrices();
+		await updateTopTenPrices();
 		await updateTvls(await fetchTvls());
 	}
 	catch (error) {

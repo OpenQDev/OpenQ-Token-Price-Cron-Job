@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const fetchCoingeckoPrices = async (pricingMetadata) => {
 	const network = 'polygon-pos';
 	const commaDelimitedTokenAddresses = pricingMetadata.map((metadata) => metadata.address).join(',');

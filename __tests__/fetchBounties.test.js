@@ -1,7 +1,7 @@
-const fetchBounties = require('../src/fetchBounties');
+const fetchTvls = require('../src/fetchTvls');
 
-describe('fetchBounties', () => {
-	it('fetchBounties', () => {
+describe('fetchTvls', () => {
+	it('fetchTvls', () => {
 		expect(true).toBe(true);
 	});
 });
