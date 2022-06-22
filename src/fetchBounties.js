@@ -1,39 +1,11 @@
+const getBounties = require("./getBounties")
+
 // Same as in OpenQSubgraphClient
 const fetchBounties = async () => {
 	const bounties = [];
 	const pricingMetadata = [];
 
-	const getBounties = async (sortOrder, startAt, quantity) => {
-		try {
-			let result = null;
-			try {
-				result = await axios
-					.post(
-						`${process.env.OPENQ_SUBGRAPH_HTTP_URL}/graphql`,
-						{
-							query: GET_ALL_BOUNTIES,
-							variables: { skip: startAt, sortOrder, quantity }
-						},
-						{
-							headers: {
-								'Authorization': process.env.OPENQ_API_SECRET,
-							},
-						}
-					);
-			} catch (error) {
-				console.error(error);
-			}
-
-			return result.data.bounties.filter(
-				(bounty) =>
-					bounty.bountyId.slice(0, 1) === 'I' ||
-					bounty.bountyId.slice(0, 1) === 'M'
-			);
-		} catch (e) {
-			console.log(e);
-		}
-		return [];
-	};
+	
 
 	// Recursive function in case we need multiple pages of bounties.
 	const getAllBounties = async () => {
