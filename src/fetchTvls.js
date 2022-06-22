@@ -9,11 +9,11 @@ const openqPolygonMetadata = require("./constants/openq-polygon-mainnet-indexabl
 const openqLocalMetadata = require("./constants/openq-local-indexable.json");
 const polygonMetadata = require("./constants/polygon-mainnet-indexable.json");
 
-const fetchBounties = async () => {
+const fetchTvls = async () => {
 	const { pricingMetadata, bounties } = await getAllBounties([], []);
 	const data = await fetchCoingeckoPrices(pricingMetadata);
 	const tvls = await getTokenValues(bounties, pricingMetadata, data, process.env.DEPLOY_ENV);
 	return tvls;
 };
 
-module.exports = fetchBounties;
+module.exports = fetchTvls;
