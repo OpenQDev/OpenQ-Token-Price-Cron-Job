@@ -1,5 +1,5 @@
 {
-	"name": "openq-token-price-chron",
+	"name": "openq-token-price-cronjob",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
