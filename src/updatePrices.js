@@ -1,4 +1,4 @@
-
+const UPDATE_PRICES = require("./graphql/updateBounty")
 const updatePrices = (firstTenPrices) => {
 	return new Promise((resolve, reject) => {
 
