@@ -1,8 +1,10 @@
 const UPDATE_PRICES = `
-	mutation Mutation($priceObj: JSON) {
-		updatePrices(priceObj: $priceObj) {
+	mutation Mutation($priceObj: JSON!, $pricesId: String!) {
+		updatePrices(priceObj: $priceObj, pricesId: $pricesId) {
 			timestamp
-		priceObj
+			priceObj
+			id
+			pricesId
 		}
 	}
 `;

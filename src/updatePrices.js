@@ -3,14 +3,13 @@ const axios = require("axios");
 
 const updatePrices = (firstTenPrices) => {
 	return new Promise(async (resolve, reject) => {
-
 		try {
 			const result = await axios
 				.post(
 					`${process.env.OPENQ_API_URL}/graphql`,
 					{
 						query: UPDATE_PRICES,
-						variables: { priceObj: firstTenPrices.data }
+						variables: { priceObj: firstTenPrices, pricesId: "pricesId" }
 					},
 					{
 						headers: {
@@ -18,6 +17,7 @@ const updatePrices = (firstTenPrices) => {
 						},
 					}
 				);
+			console.log(result.data);
 			return resolve(result);
 		} catch (error) {
 			return reject(error);

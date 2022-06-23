@@ -5,10 +5,15 @@ const fetchFirstTenPrices = require("./fetchFirstTenPrices");
 const updatePrices = require("./updatePrices.js");
 
 const updateFirstTenPrices = async () => {
-	const firstTenPrices = fetchFirstTenPrices();
-	const result = await updatePrices(firstTenPrices);
-	return result;
-
+	return new Promise(async (resolve, reject) => {
+		try {
+			const firstTenPrices = await fetchFirstTenPrices();
+			const result = await updatePrices(firstTenPrices);
+			resolve(result);
+		} catch (error) {
+			reject(error);
+		}
+	});
 };
 
 module.exports = updateFirstTenPrices;

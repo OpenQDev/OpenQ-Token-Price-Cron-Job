@@ -8,7 +8,7 @@ const fetchFirstTenPrices = () => {
 		const stringifiedTokens = firstTen.join(',');
 		try {
 			const firstTenPrices = await axios.get(`https://api.coingecko.com/api/v3/simple/token_price/${network}?contract_addresses=${stringifiedTokens}&vs_currencies=usd`);
-			resolve(firstTenPrices);
+			resolve(firstTenPrices.data);
 		} catch (error) {
 			reject(`Error fetching OpenQ Local Tokens: ${error}`,);
 		}
