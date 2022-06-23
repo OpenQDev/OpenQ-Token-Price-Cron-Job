@@ -1,3 +1,3 @@
 const runIndexer = require('./src/runIndexer');
 
-runIndexer();
+runIndexer(100);

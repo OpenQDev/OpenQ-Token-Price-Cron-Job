@@ -17,8 +17,9 @@ require('dotenv').config();
 
 const indexer = async () => {
 	try {
-		await updateTopTenPrices();
-		await updateTvls(await fetchTvls());
+		const result = await updateTopTenPrices();
+		console.log(result.data.data.updatePrices.count);
+		// await updateTvls(await fetchTvls());
 	}
 	catch (error) {
 		console.error('An error occured: ', error);
