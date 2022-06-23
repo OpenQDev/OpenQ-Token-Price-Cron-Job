@@ -1,6 +1,7 @@
-const calculateTvl = require('./addTokenBalanceToTotal');
 const { getAddress } = require('@ethersproject/address');
-const getMetadata = require('./utils/getMetadata');
+
+const calculateTvl = require('./calculateTvl');
+const getTokenMetadata = require('./utils/getTokenMetadata');
 
 /**
  * 
@@ -11,7 +12,7 @@ const getMetadata = require('./utils/getMetadata');
  * @description Returns the formatted parameters for updating TVL for each bounty in the OpenQ-API
  */
 const getTokenValues = async (bounties, pricingMetadata, data, environment) => {
-	const tokenMetadata = getMetadata(environment);
+	const tokenMetadata = getTokenMetadata(environment);
 	const tvls = bounties.map((bounty) => {
 		const tvl = calculateTvl(bounty, tokenMetadata, data);
 		return {
