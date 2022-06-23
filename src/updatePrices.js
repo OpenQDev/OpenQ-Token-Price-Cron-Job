@@ -1,8 +1,8 @@
-const UPDATE_PRICES = require("./graphql/updateBounty")
-const axios = require("axios")
+const { UPDATE_PRICES } = require("./graphql/mutations");
+const axios = require("axios");
 
 const updatePrices = (firstTenPrices) => {
-	return new Promise(async(resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 
 		try {
 			const result = await axios

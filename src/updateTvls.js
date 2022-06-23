@@ -1,6 +1,8 @@
 const { getAddress } = require('@ethersproject/address');
 const axios = require('axios');
 
+const { UPDATE_BOUNTY_TVL } = require('./graphql/mutations');
+
 const updateTvls = async (tvlBodies) => {
 	const pending = [];
 	for (let i = 0; i < tvlBodies.length; i += 1) {

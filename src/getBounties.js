@@ -1,4 +1,4 @@
-const GET_ALL_BOUNTIES = require('./graphql/getAllBounties');
+const { GET_ALL_BOUNTIES } = require('./graphql/mutations');
 const axios = require('axios');
 
 /**

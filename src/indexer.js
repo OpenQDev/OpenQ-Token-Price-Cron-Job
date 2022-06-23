@@ -9,6 +9,7 @@ const indexer = async () => {
 		// await updateTvls(await fetchTvls());
 	}
 	catch (error) {
+		// GraphQL errors at error.response.data.errors
 		console.error('An error occured: ', error);
 	}
 };
