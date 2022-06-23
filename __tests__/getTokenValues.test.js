@@ -17,7 +17,7 @@ describe('getTokenValues', () => {
 			]
 		};
 
-		const pricingMetadata = { [wbtcAddress]: { address: 1400.00 } };
+		const pricingMetadata = { [wbtcAddress.toLowerCase()]: { address: wbtcAddress} };
 		
 		const priceData = { [wbtcAddress.toLowerCase()]: { usd: 1400.00 } };
 	const bounties = [bounty, bounty];
