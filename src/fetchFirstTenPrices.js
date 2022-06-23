@@ -1,4 +1,5 @@
-const openQPolygonMainnetEnumerable = require("./constants/openq-polygon-mainnet-enumerable.json")
+const openQPolygonMainnetEnumerable = require("./constants/openq-polygon-mainnet-enumerable.json");
+const axios = require("axios");
 
 const fetchFirstTenPrices = () => {
 	return new Promise(async (resolve, reject) => {
