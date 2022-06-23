@@ -17,7 +17,7 @@ const updateTvls = async (tvlBodies) => {
 				.post(
 					`${process.env.OPENQ_API_URL}/graphql`,
 					{
-						query: UPDATE_BOUNTY,
+						query: UPDATE_BOUNTY_TVL,
 						variables: { address, tvl, organizationId },
 					},
 					{

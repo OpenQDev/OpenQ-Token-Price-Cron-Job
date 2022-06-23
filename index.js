@@ -1,3 +1,4 @@
 const runIndexer = require('./src/runIndexer');
+require('dotenv').config();
 
-runIndexer(7000);
+runIndexer(process.env.INITIAL_WAIT_PERIOD_MS);
