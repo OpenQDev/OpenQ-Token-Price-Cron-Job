@@ -1,5 +1,5 @@
 const addTokenBalanceToTotal = require('../src/addTokenBalanceToTotal');
-const polygonMetadata = require('../src/constants/openq-polygon-mainnet-indexable.json');
+const polygonMetadata = require('../src/constants/polygon-mainnet-indexable.json');
 
 describe('addTokenBalanceToTotal', () => {
 	it('addTokenBalanceToTotal', () => {

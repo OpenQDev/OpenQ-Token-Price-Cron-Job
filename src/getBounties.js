@@ -1,6 +1,13 @@
 const GET_ALL_BOUNTIES = require('./graphql/getAllBounties');
 const axios = require('axios');
 
+/**
+ * 
+ * @param {*} sortOrder 
+ * @param {skip for offset based pagination} startAt 
+ * @param {barch size} quantity 
+ * @returns 
+ */
 const getBounties = async (sortOrder, startAt, quantity) => {
 	const promise = new Promise(async (resolve, reject) => {
 		try {

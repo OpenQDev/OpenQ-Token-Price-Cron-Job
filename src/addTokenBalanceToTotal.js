@@ -4,10 +4,10 @@ const { getAddress } = require('@ethersproject/address');
 const addTokenBalanceToTotal = (runningTotal, tokenBalance, tokenMetadata, priceData) => {
 	const checksummedTokenAddress = getAddress(tokenBalance.tokenAddress);
 	const lowerCaseTokenAddress = tokenBalance.tokenAddress.toLowerCase();
-	if (!runningTotal) { return tokenBalance; }
-	const currentMetadata = tokenMetadata[checksummedTokenAddress] || polygonMetadata[checksummedTokenAddress];
+	console.log(checksummedTokenAddress, lowerCaseTokenAddress)
+	const currentMetadata = tokenMetadata[checksummedTokenAddress] || polygonMetadata[lowerCaseTokenAddress];
 	const multiplier = tokenBalance.volume / 10 ** currentMetadata.decimals;
-	const price = priceData[currentMetadata.address.toLowerCase()] || 0;
+	const price = priceData[currentMetadata.address.toLowerCase()];
 	const newTotal = price.usd * multiplier + parseFloat(runningTotal);
 	return newTotal;
 };

@@ -1,5 +1,6 @@
 const polygonMetadata = require("./constants/polygon-mainnet-indexable.json");
 const { getAddress } = require('@ethersproject/address');
+const getMetadata = require("./utils/getTokenMetadata");
 
 const populatePricingMetadata = (filteredBounties, environment) => {
 	const pricingMetadata = [];
