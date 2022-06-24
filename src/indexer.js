@@ -9,6 +9,9 @@ const indexer = async () => {
 		const updateTopTenResult = await updateTopTenPrices();
 		const updateTvlsResult = await updateTvls(await fetchTvls(process.env.DEPLOY_ENV));
 		console.log('updateTopTenResult', updateTopTenResult);
+		if (updateTopTenResult.data.errors !== "undefined") {
+			console.log('updateTopTenResult.data.errors', updateTopTenResult.data.errors);
+		}
 		console.log('updateTvlsResult', updateTvlsResult);
 	}
 	catch (error) {
