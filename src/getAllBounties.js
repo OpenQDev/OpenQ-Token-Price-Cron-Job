@@ -10,7 +10,7 @@ const getBounties = require('./getBounties');
  * Recursive paginated function
  */
 const getAllBounties = async (pricingMetadata = pricingMetadata, bounties, environment) => {
-	const batch = await getBuounties('asc', 0, 100);
+	const batch = await getBounties('asc', 0, 100);
 	// Filter out any GitHub Id's that are not Issues (e.g. Pull Requests)
 	const filteredBounties = filterNonIssues(batch);
 	pricingMetadata = populatePricingMetadata(filteredBounties, environment);

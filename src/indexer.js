@@ -6,9 +6,10 @@ require('dotenv').config();
 
 const indexer = async () => {
 	try {
-		// const result = await updateTopTenPrices();
-		const result = await updateTvls(await fetchTvls(process.env.DEPLOY_ENV));
-		console.log(result);
+		const updateTopTenResult = await updateTopTenPrices();
+		const updateTvlsResult = await updateTvls(await fetchTvls(process.env.DEPLOY_ENV));
+		console.log('updateTopTenResult', updateTopTenResult);
+		console.log('updateTvlsResult', updateTvlsResult);
 	}
 	catch (error) {
 		// GraphQL errors at error.response.data.errors
