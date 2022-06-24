@@ -11,7 +11,6 @@ var job = new CronJob(
 		await sleep(process.env.INITIAL_WAIT_PERIOD_MS);
 		console.log('Running...');
 		await indexer();
-		console.log('TVLs updated ✅');
 	},
 	function () {
 		console.log(`COMPLETED`);
