@@ -13,7 +13,7 @@ const getBounties = async (sortOrder, startAt, quantity) => {
 		try {
 			result = await axios
 				.post(
-					`${process.env.OPENQ_SUBGRAPH_HTTP_URL}/graphql`,
+					`${process.env.OPENQ_SUBGRAPH_HTTP_URL}`,
 					{
 						query: GET_ALL_BOUNTIES,
 						variables: { skip: startAt, sortOrder, quantity }
