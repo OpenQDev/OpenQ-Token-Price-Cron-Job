@@ -7,7 +7,7 @@ const bountyAddress = "0x2ad861c24530744a46f888b8de8029cef592d23d";
 const bounty = {
 	bountyId: 'M_kwDOE5zs-M480ik8',
 	organization: { id: mockOrganizationId },
-	address: bountyAddress,
+	bountyAddress,
 	bountyTokenBalances: [
 		{ tokenAddress: wbtcAddress, volume: 1000 },
 		{ tokenAddress: wbtcAddress, volume: 1000 },
@@ -15,28 +15,28 @@ const bounty = {
 	]
 };
 const expectedTvlData = [
-        {
-          address: '0x2ad861c24530744a46f888b8de8029cef592d23d',
-          tvl: 0.6195,
-          organizationId: 'O_123123123'
-        },
-        {
-          address: '0x2ad861c24530744a46f888b8de8029cef592d23d',
-          tvl: 0.6195,
-          organizationId: 'O_123123123'
-        }
-      ]
+	{
+		address: '0x2ad861c24530744a46f888b8de8029cef592d23d',
+		tvl: 0.6195,
+		organizationId: 'O_123123123'
+	},
+	{
+		address: '0x2ad861c24530744a46f888b8de8029cef592d23d',
+		tvl: 0.6195,
+		organizationId: 'O_123123123'
+	}
+];
 
 const bounties = [bounty, bounty];
 beforeEach(() => {
 	jest.mock('axios');
 	axios.get = jest.fn().mockResolvedValue({ data });
-	axios.post = jest.fn().mockResolvedValue({ data: { bounties } });
+	axios.post = jest.fn().mockResolvedValue({ data: { data: { bounties } } });
 });
 
 describe('fetchTvls', () => {
 	it('fetchTvls', async () => {
-	const tvlData = await fetchTvls("production");
+		const tvlData = await fetchTvls("production");
 		expect(tvlData).toEqual(expectedTvlData);
 	});
 });

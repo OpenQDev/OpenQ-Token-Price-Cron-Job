@@ -17,7 +17,6 @@ const updatePrices = (firstTenPrices) => {
 						},
 					}
 				);
-			console.log(result.data);
 			return resolve(result);
 		} catch (error) {
 			return reject(error);

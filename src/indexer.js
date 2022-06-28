@@ -7,12 +7,12 @@ require('dotenv').config();
 const indexer = async () => {
 	try {
 		const updateTopTenResult = await updateTopTenPrices();
-		const updateTvlsResult = await updateTvls(await fetchTvls(process.env.DEPLOY_ENV));
-		console.log('updateTopTenResult', updateTopTenResult);
+		const tvls = await fetchTvls(process.env.DEPLOY_ENV);
+		console.log(tvls);
+		const updateTvlsResult = await updateTvls(tvls);
 		if (updateTopTenResult.data.errors !== undefined) {
 			console.log('updateTopTenResult.data.errors', updateTopTenResult.data.errors);
 		}
-		console.log('updateTvlsResult', updateTvlsResult);
 		if (updateTopTenResult.data.errors !== undefined) {
 			console.log('updateTvlsResult.data.errors', updateTvlsResult.data.errors);
 		}
