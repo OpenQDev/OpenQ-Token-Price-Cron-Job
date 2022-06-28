@@ -17,11 +17,13 @@ const bounty = {
 const expectedTvlData = [
 	{
 		address: '0x2ad861c24530744a46f888b8de8029cef592d23d',
+		bountyId: 'M_kwDOE5zs-M480ik8',
 		tvl: 0.6195,
 		organizationId: 'O_123123123'
 	},
 	{
 		address: '0x2ad861c24530744a46f888b8de8029cef592d23d',
+		bountyId: 'M_kwDOE5zs-M480ik8',
 		tvl: 0.6195,
 		organizationId: 'O_123123123'
 	}
