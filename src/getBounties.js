@@ -24,7 +24,7 @@ const getBounties = async (sortOrder, startAt, quantity) => {
 						},
 					}
 				);
-			resolve(result.data.bounties);
+			resolve(result.data.data.bounties);
 		} catch (e) {
 			console.error(e);
 			resolve([]);
