@@ -30,11 +30,13 @@ const UPDATE_BOUNTY_TVL = `
 		$address: String!
 		$tvl: Float!
 		$organizationId: String!
+		$bountyId: String!
 	) {
 		updateBounty(
 			address: $address
 			tvl: $tvl
 			organizationId: $organizationId
+			bountyId: $bountyId
 		) {
 			address
 		}

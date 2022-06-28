@@ -9,6 +9,7 @@ const updateTvls = async (tvlBodies) => {
 		const value = tvlBodies[i];
 		const address = getAddress(value.address);
 		const tvl = parseFloat(value.tvl);
+		const bountyId = value.bountyId;
 		const { organizationId } = value;
 
 		let result = null;
@@ -18,7 +19,7 @@ const updateTvls = async (tvlBodies) => {
 					`${process.env.OPENQ_API_URL}/graphql`,
 					{
 						query: UPDATE_BOUNTY_TVL,
-						variables: { address, tvl, organizationId },
+						variables: { address, tvl, organizationId, bountyId },
 					},
 					{
 						headers: {
@@ -27,7 +28,8 @@ const updateTvls = async (tvlBodies) => {
 					}
 				);
 		} catch (error) {
-			console.error(error);
+			// GraphQL errors at error.response.data.errors
+			console.error('error in updateTvls', error);
 		}
 		pending.push(result.data);
 	}
