@@ -25,7 +25,6 @@ const indexer = async () => {
 	}
 	catch (error) {
 		// GraphQL errors at error.response.data.errors
-		console.log('gql errors', error.response.data.errors);
 		console.error('An error occured: ', error);
 	}
 };

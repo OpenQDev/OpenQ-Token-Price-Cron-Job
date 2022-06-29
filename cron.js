@@ -5,7 +5,7 @@ const indexer = require('./src/indexer');
 require('dotenv').config();
 
 var job = new CronJob(
-	'*/10 * * * * *',
+	process.env.CRON_STRING,
 	async function () {
 		console.log(`Initialized. Waiting for ${process.env.INITIAL_WAIT_PERIOD_MS / 1000} seconds for OpenQ-API to initialize`);
 		await sleep(process.env.INITIAL_WAIT_PERIOD_MS);
