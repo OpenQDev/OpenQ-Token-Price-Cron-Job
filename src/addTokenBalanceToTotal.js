@@ -12,4 +12,4 @@ const addTokenBalanceToTotal = (runningTotal, tokenBalance, tokenMetadata, price
 	return newTotal;
 };
 
-module.exports = addTokenBalanceToTotal;
+module.exports = addTokenBalanceToTotal; 
