@@ -18,6 +18,7 @@ const getTokenValues = async (bounties, pricingMetadata, data, environment) => {
 		return {
 			address: bounty.bountyAddress,
 			bountyId: bounty.bountyId,
+			type: bounty.bountyType,
 			tvl,
 			organizationId: bounty.organization.id,
 		};
