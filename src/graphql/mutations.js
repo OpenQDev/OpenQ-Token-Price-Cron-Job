@@ -14,6 +14,7 @@ const GET_ALL_BOUNTIES = `
 		bounties(skip: $skip, sortOrder: $sortOrder, quantity: $quantity) {
 			bountyAddress
 			bountyId
+			bountyType
 			organization {
 				id
 			}
@@ -31,9 +32,11 @@ const UPDATE_BOUNTY_TVL = `
 		$tvl: Float!
 		$organizationId: String!
 		$bountyId: String!
+		$type: String!
 	) {
 		updateBounty(
 			address: $address
+			type: $type
 			tvl: $tvl
 			organizationId: $organizationId
 			bountyId: $bountyId
