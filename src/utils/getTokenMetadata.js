@@ -6,6 +6,7 @@ const getTokenMetadata = (environment) => {
 		case 'local':
 			return openqLocalMetadata;
 		case 'production':
+			return openqPolygonMetadata;
 		case 'staging':
 			return openqPolygonMetadata;
 		default:
