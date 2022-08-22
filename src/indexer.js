@@ -1,6 +1,6 @@
 const updateTopTenPrices = require('./updateTopTenPrices');
-const updateTvls = require('./updateTvls');
-const fetchTvls = require('./fetchTvls');
+const updateContracts = require('./updateContracts');
+const fetchContractParameters = require('./fetchContractParameters');
 
 require('dotenv').config();
 
@@ -9,9 +9,9 @@ const indexer = async () => {
 		const updateTopTenResult = await updateTopTenPrices();
 		console.log(updateTopTenResult);
 
-		const tvls = await fetchTvls(process.env.DEPLOY_ENV, 1000);
+		const tvls = await fetchContractParameters(process.env.DEPLOY_ENV, 1000);
 
-		const updateTvlsResult = await updateTvls(tvls);
+		const updateTvlsResult = await updateContracts(tvls);
 		console.log(updateTvlsResult);
 
 		// if (updateTopTenResult.data.errors !== undefined) {
