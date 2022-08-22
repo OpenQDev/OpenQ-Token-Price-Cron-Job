@@ -19,7 +19,7 @@ const getContractParameters = async (bounties, pricingMetadata, data, environmen
 	});
 
 	const getCategory = (labels, type) => {
-		if (type === "0") {
+		if (type === "0"|| labels?.some(label=>label === "prime")) {
 			return "prime";
 		}
 		if (type === "1" && labels?.some(label=>label === "learn2earn") ) {
