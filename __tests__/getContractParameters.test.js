@@ -1,7 +1,23 @@
-const getTokenValues = require('../src/getTokenValues');
+const axios = require("axios")
 
-describe('getTokenValues', () => {
-	it('getTokenValues', async () => {
+const getContractParameters = require('../src/getContractParameters');
+
+
+beforeEach(() => {
+	jest.mock('axios');
+	axios.post = jest.fn()
+axios.post.mockImplementation((url) => {
+  switch (url) {
+    case 'https://api.github.com/graphql':
+      return Promise.resolve({data: {data:{nodes:[{id:"I_kwDOHYMKVc5MUfz4",labels:{nodes:[]}}]}}})
+    default:
+      return Promise.resolve({ data: { data: { bounties } } })
+  }
+})
+});
+
+describe('getContractParameters', () => {
+	it('getContractParameters', async () => {
 		const mockOrganizationId = "organizationId";
 		const mockBountyAddress = "bountyAddress";
 		const mockBountyType = "1"
@@ -27,7 +43,7 @@ describe('getTokenValues', () => {
 		const bounties = [bounty, bounty];
 
 		// ACT
-		const actualTVlBody = await getTokenValues(bounties, pricingMetadata, priceData, "production");
+		const actualTVlBody = await getContractParameters(bounties, pricingMetadata, priceData, "production");
 
 		// ASSERT
 		const expectedTvl = .042;

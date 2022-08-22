@@ -1,7 +1,7 @@
-const fetchTvls = require('../src/fetchTvls');
+const fetchContractParameters = require('../src/fetchContractParameters');
 
-describe('fetchTvls', () => {
-	it('fetchTvls', () => {
+describe('fetchContractParameters', () => {
+	it('fetchContractParameters', () => {
 		expect(true).toBe(true);
 	});
 });

@@ -22,10 +22,10 @@ const getContractParameters = async (bounties, pricingMetadata, data, environmen
 		if (type === "0") {
 			return "prime";
 		}
-		if (type === "1" && labels.some(label=>label === "learn2earn") ) {
+		if (type === "1" && labels?.some(label=>label === "learn2earn") ) {
 			return "learn2earn";
 		}
-		if ((type === "2" || type === "3") && labels.some(label=>label === "contests")) {
+		if ((type === "2" || type === "3") && labels?.some(label=>label === "contests")) {
 			return "contest";
 			}
 		return undefined		
