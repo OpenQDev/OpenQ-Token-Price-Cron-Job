@@ -5,13 +5,14 @@ const UPDATE_PRICES = `
 			priceObj
 			id
 			pricesId
+			
 		}
 	}
 `;
 
 const GET_ALL_BOUNTIES = `
 	query GetAllIssues($sortOrder: String!, $skip: Int!, $quantity: Int!) {
-		bounties(skip: $skip, sortOrder: $sortOrder, quantity: $quantity) {
+		bounties(skip: $skip, sortOrder: $sortOrder, quantity: $quantity, orderBy: $bountyMintTime) {
 			bountyAddress
 			bountyId
 			bountyType
@@ -33,6 +34,7 @@ const UPDATE_BOUNTY_TVL = `
 		$organizationId: String!
 		$bountyId: String!
 		$type: String!
+		$category: String
 	) {
 		updateBounty(
 			address: $address
@@ -40,6 +42,7 @@ const UPDATE_BOUNTY_TVL = `
 			tvl: $tvl
 			organizationId: $organizationId
 			bountyId: $bountyId
+			category: $category
 		) {
 			address
 		}
