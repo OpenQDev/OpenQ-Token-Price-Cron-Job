@@ -18,8 +18,8 @@ const getContractParameters = async (bounties, pricingMetadata, data, environmen
 		return bounty.bountyId;
 	});
 	const getCategory = (labels) => {
-		if (labels?.includes("not for profit")) {
-			return "not for profit";
+		if (labels?.includes("non-profit")) {
+			return "non-profit";
 		}
 		return undefined;
 	};		

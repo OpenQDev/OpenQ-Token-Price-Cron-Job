@@ -22,7 +22,7 @@ const getIssues = async (bountyIds) => {
 			const indexedIssues={}
 		result.data.data.nodes.map(node => {
 			const issueLabels = node.labels.nodes.map(innerNode => innerNode.name.toLowerCase())
-				.filter(label => label === "not for profit");
+				.filter(label => label === "non-profit");
 			return { id: node.id, labels: issueLabels }})
 		.forEach(issue=>{
 			 indexedIssues[issue.id]=issue.labels||null;
