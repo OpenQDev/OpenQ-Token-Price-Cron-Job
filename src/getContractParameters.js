@@ -17,23 +17,17 @@ const getContractParameters = async (bounties, pricingMetadata, data, environmen
 	const bountyIds = bounties.map(bounty => {
 		return bounty.bountyId;
 	});
-
-	const getCategory = (labels, type) => {
-		if (type === "0"|| labels?.some(label=>label === "prime")) {
-			return "prime";
+	const getCategory = (labels) => {
+		if (labels?.includes("non-profit")) {
+			return "non-profit";
 		}
-		if (type === "1" && labels?.some(label=>label === "learn2earn") ) {
-			return "learn2earn";
-		}
-		if ((type === "2" || type === "3") && labels?.some(label=>label === "contest")) {
-			return "contest";
-			}
-		return undefined		
+		return undefined;
 	};		
 
 	const indexedGithubIssues = await getIssues(bountyIds);
 	const tvls = bounties.map((bounty) => {
 		const tvl = calculateTvl(bounty, tokenMetadata, data);
+		console.log(indexedGithubIssues, bounty.bountyId)
 		const labels = indexedGithubIssues[bounty.bountyId];
 		const category =  getCategory(labels, bounty.bountyType);
 		return {

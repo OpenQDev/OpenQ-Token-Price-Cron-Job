@@ -2,7 +2,7 @@
   nodes(ids: $bountyIds) {
     ... on Issue {
 	id
-      labels(first: 1) {
+      labels(first: 10) {
         
         nodes {
           name

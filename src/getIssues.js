@@ -2,7 +2,6 @@ const axios = require('axios');
 const { GET_CATEGORY } = require("./graphql/query.js");
 
 const getIssues = async (bountyIds) => {
-const categories = ['prime', 'learn2earn', 'contest'];
 	let result;
 
 	try {
@@ -23,7 +22,7 @@ const categories = ['prime', 'learn2earn', 'contest'];
 			const indexedIssues={}
 		result.data.data.nodes.map(node => {
 			const issueLabels = node.labels.nodes.map(innerNode => innerNode.name.toLowerCase())
-				.filter(label => categories.some(category => category === label));
+				.filter(label => label === "non-profit");
 			return { id: node.id, labels: issueLabels }})
 		.forEach(issue=>{
 			 indexedIssues[issue.id]=issue.labels||null;
