@@ -21,14 +21,14 @@ const expectedTvlData = [
 		bountyId: 'M_kwDOE5zs-M480ik8',
 		tvl: 0.6195,
 		organizationId: 'O_123123123',
-		category: "learn2earn",
+		category: "not for profit",
 		type: "1"
 	},
 	{
 		address: '0x2ad861c24530744a46f888b8de8029cef592d23d',
 		bountyId: 'M_kwDOE5zs-M480ik8',
 		tvl: 0.6195,
-		category: "learn2earn",
+		category: "not for profit",
 		type: undefined,
 		organizationId: 'O_123123123',
 		type: "1"
@@ -43,7 +43,7 @@ beforeEach(() => {
 axios.post.mockImplementation((url) => {
   switch (url) {
     case 'https://api.github.com/graphql':
-      return Promise.resolve({data: {data:{nodes:[{id:"M_kwDOE5zs-M480ik8",labels:{nodes:[{name: "Learn2Earn"}]}}]}}})
+      return Promise.resolve({data: {data:{nodes:[{id:"M_kwDOE5zs-M480ik8",labels:{nodes:[{name: "Not for profit"}]}}]}}})
     default:
       return Promise.resolve({ data: { data: { bounties } } })
   }
