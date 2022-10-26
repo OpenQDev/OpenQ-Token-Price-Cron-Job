@@ -13,7 +13,6 @@ const updateContracts = async (tvlBodies) => {
 		const bountyId = value.bountyId;
 		const type = value.type
 		const { organizationId } = value;
-
 		let result = null;
 		try {
 			result = await axios
