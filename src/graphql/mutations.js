@@ -30,7 +30,7 @@ const GET_ALL_BOUNTIES = `
 const UPDATE_BOUNTY_TVL = `
 	mutation Mutation(
 		$address: String!
-		$tvl: Float!
+		$tvl: Float
 		$organizationId: String!
 		$bountyId: String!
 		$type: String!
