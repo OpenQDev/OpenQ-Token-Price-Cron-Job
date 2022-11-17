@@ -34,6 +34,7 @@ const UPDATE_BOUNTY_TVL = `
 		$organizationId: String!
 		$bountyId: String!
 		$type: String!
+		$repositoryId: String!
 		$category: String
 	) {
 		updateBounty(
@@ -43,6 +44,7 @@ const UPDATE_BOUNTY_TVL = `
 			organizationId: $organizationId
 			bountyId: $bountyId
 			category: $category
+			repositoryId: $repositoryId
 		) {
 			address
 		}

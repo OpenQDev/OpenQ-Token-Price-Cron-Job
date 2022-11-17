@@ -4,15 +4,16 @@ const axios = require('axios');
 const { UPDATE_BOUNTY_TVL } = require('./graphql/mutations');
 
 const updateContracts = async (tvlBodies) => {
+	console.log(tvlBodies);
 	const pending = [];
 	for (let i = 0; i < tvlBodies.length; i += 1) {
 		const value = tvlBodies[i];
 		const address = getAddress(value.address);
-		const category = value.category
+		const category = value.category;
 		const tvl = parseFloat(value.tvl);
 		const bountyId = value.bountyId;
-		const type = value.type
-		const { organizationId } = value;
+		const type = value.type;
+		const { organizationId, repositoryId } = value;
 		let result = null;
 		try {
 			result = await axios
@@ -20,7 +21,7 @@ const updateContracts = async (tvlBodies) => {
 					`${process.env.OPENQ_API_URL}/graphql`,
 					{
 						query: UPDATE_BOUNTY_TVL,
-						variables: { address, tvl, organizationId, bountyId, type, category },
+						variables: { address, tvl, organizationId, bountyId, type, repositoryId, category },
 					},
 					{
 						headers: {
@@ -28,7 +29,7 @@ const updateContracts = async (tvlBodies) => {
 						},
 					}
 				);
-				
+
 		} catch (error) {
 			// GraphQL errors at error.response.data.errors
 			console.error('error in updateTvls', error);
