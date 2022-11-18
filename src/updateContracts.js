@@ -4,7 +4,6 @@ const axios = require('axios');
 const { UPDATE_BOUNTY_TVL } = require('./graphql/mutations');
 
 const updateContracts = async (tvlBodies) => {
-	console.log(tvlBodies);
 	const pending = [];
 	for (let i = 0; i < tvlBodies.length; i += 1) {
 		const value = tvlBodies[i];
