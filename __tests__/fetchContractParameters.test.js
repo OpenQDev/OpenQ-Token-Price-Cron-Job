@@ -38,21 +38,22 @@ const expectedTvlData = [
 const bounties = [bounty, bounty];
 beforeEach(() => {
 	jest.mock('axios');
-	axios.post = jest.fn()
-	axios.get = jest.fn().mockResolvedValue({data});
-axios.post.mockImplementation((url) => {
-  switch (url) {
-    case 'https://api.github.com/graphql':
-      return Promise.resolve({data: {data:{nodes:[{id:"M_kwDOE5zs-M480ik8",labels:{nodes:[{name: "non-profit"}]}}]}}})
-    default:
-      return Promise.resolve({ data: { data: { bounties } } })
-  }
-})
+	axios.post = jest.fn();
+	axios.get = jest.fn().mockResolvedValue({ data });
+	axios.post.mockImplementation((url) => {
+		switch (url) {
+			case 'https://api.github.com/graphql':
+				return Promise.resolve({ data: { data: { nodes: [{ id: "M_kwDOE5zs-M480ik8", labels: { nodes: [{ name: "non-profit" }] } }] } } });
+			default:
+				return Promise.resolve({ data: { data: { bounties } } });
+		}
+	});
 });
 
 describe('fetchContractParameters', () => {
 	it('fetchContractParameters', async () => {
 		const tvlData = await fetchContractParameters("production");
+		console.log(tvlData);
 		expect(tvlData).toEqual(expectedTvlData);
 	});
 });

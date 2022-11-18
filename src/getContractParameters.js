@@ -25,14 +25,16 @@ const getContractParameters = async (bounties, pricingMetadata, data, environmen
 	};
 
 	// TODO: 
-	const indexedGithubIssues = await getIssues(bountyIds);
+	const { indexedGithubIssues, repositoryId } = await getIssues(bountyIds);
+	console.log('repositoryId', repositoryId);
 	//filters for closed
 	const tvls = bounties.filter((bounty) => { return bounty.status === "0" || bounty.bountyType !== "0"; })
 		.map((bounty) => {
 			const tvl = calculateTvl(bounty, tokenMetadata, data);
 			const labels = indexedGithubIssues[bounty.bountyId];
 			// TODO:How to get this repositoryId to the bountyUpdater?
-			const repositoryId = indexedGithubIssues[bounty.bountyId].repository.repositoryId;
+			console.log('indexedGithubIssues[bounty.bountyId] keys', JSON.stringify(indexedGithubIssues[bounty.bountyId]));
+			const repositoryId = repositoryId[bounty.bountyId];
 			const category = getCategory(labels, bounty.bountyType);
 			return {
 				address: bounty.bountyAddress,

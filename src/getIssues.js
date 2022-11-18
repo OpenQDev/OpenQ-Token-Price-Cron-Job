@@ -19,18 +19,19 @@ const getIssues = async (bountyIds) => {
 				}
 
 			);
-			const indexedIssues={}
+		const indexedGithubIssues = {};
+		const repositoryIds = {};
 		result.data.data.nodes.map(node => {
-			const issueLabels = node.labels.nodes.map(innerNode => innerNode.name.toLowerCase())
-				.filter(label => label === "non-profit");
-			return { id: node.id, labels: issueLabels }})
-		.forEach(issue=>{
-			 indexedIssues[issue.id]=issue.labels||null;
+			const issueLabels = node.labels.nodes.map(innerNode => innerNode.name.toLowerCase()).filter(label => label === "non-profit");
+			repositoryIds[node.id] = node.repository.id || null;
+			return { id: node.id, labels: issueLabels };
+		}).forEach(issue => {
+			indexedGithubIssues[issue.id] = issue.labels || null;
 		});
-		return indexedIssues;
+		return { indexedGithubIssues, repositoryIds };
 	} catch (error) {
 		// GraphQL errors at error.response.data.errors
-		console.error('error in updateTvls', error);
+		console.error('error in getIssues', error);
 	}
 
 
