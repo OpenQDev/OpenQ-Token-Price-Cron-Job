@@ -1,35 +1,37 @@
-const axios = require("axios")
+const axios = require("axios");
 
 const getContractParameters = require('../src/getContractParameters');
 
-
-beforeEach(() => {
-	jest.mock('axios');
-	axios.post = jest.fn()
-axios.post.mockImplementation((url) => {
-  switch (url) {
-    case 'https://api.github.com/graphql':
-      return Promise.resolve({data: {data:{nodes:[{id:"I_kwDOHYMKVc5MUfz4",labels:{nodes:[]}}]}}})
-    default:
-      return Promise.resolve({ data: { data: { bounties } } })
-  }
-})
-});
-
 describe('getContractParameters', () => {
+	const mockOrganizationId = "organizationId";
+	const mockBountyAddress = "bountyAddress";
+	const mockBountyType = "1";
+	const wbtcAddress = "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6";
+	const mockBountyId = "I_kwDOHAZTVc5PYxa5";
+	const mockRepoId = "repoId1";
+
+	beforeEach(() => {
+		jest.mock('axios');
+		axios.post = jest.fn();
+		axios.post.mockImplementation((url) => {
+			switch (url) {
+				case 'https://api.github.com/graphql':
+					return Promise.resolve({ data: { data: { nodes: [{ id: mockBountyId, labels: { nodes: [] }, repository: { id: mockRepoId } }] } } });
+				default:
+					return Promise.resolve({ data: { data: { bounties } } });
+			}
+		});
+	});
+
 	it('getContractParameters', async () => {
-		const mockOrganizationId = "organizationId";
-		const mockBountyAddress = "bountyAddress";
-		const mockBountyType = "1"
-		const wbtcAddress = "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6";
-		const mockBountyId = "I_kwDOHAZTVc5PYxa5"
+
 		const bounty = {
 			bountyAddress: mockBountyAddress,
 			organization: {
 				id: mockOrganizationId
 			},
-			bountyId: "I_kwDOHAZTVc5PYxa5",
-			bountyType: "1",
+			bountyId: mockBountyId,
+			bountyType: mockBountyType,
 			bountyTokenBalances: [
 				{ tokenAddress: wbtcAddress, volume: 1000 },
 				{ tokenAddress: wbtcAddress, volume: 1000 },
@@ -52,14 +54,16 @@ describe('getContractParameters', () => {
 			tvl: expectedTvl,
 			organizationId: mockOrganizationId,
 			type: mockBountyType,
-			bountyId: mockBountyId
+			bountyId: mockBountyId,
+			repositoryId: mockRepoId
 		},
 		{
 			address: mockBountyAddress,
 			tvl: expectedTvl,
 			type: mockBountyType,
 			bountyId: mockBountyId,
-			organizationId: mockOrganizationId
+			organizationId: mockOrganizationId,
+			repositoryId: mockRepoId
 		}
 		];
 
