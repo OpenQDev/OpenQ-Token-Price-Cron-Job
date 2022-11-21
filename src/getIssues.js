@@ -33,8 +33,6 @@ const getIssues = async (bountyIds) => {
 		// GraphQL errors at error.response.data.errors
 		console.error('error in getIssues', error);
 	}
-
-
 };
 
 module.exports = getIssues;
