@@ -13,7 +13,7 @@ const addTokenBalanceToTotal = (runningTotal, tokenBalance, tokenMetadata, price
 	}
 	catch(error){
 		console.log(error);
-		return 0;
+		return parseFloat(runningTotal);
 
 	}
 };

@@ -27,7 +27,7 @@ const getContractParameters = async (bounties, pricingMetadata, data, environmen
 	// TODO: 
 	const { indexedGithubIssues, repositoryIds } = await getIssues(bountyIds);
 	//filters for closed
-	const tvls = bounties.filter((bounty) => { return bounty.status === "0" || bounty.bountyType !== "0"; })
+	const tvls = bounties
 		.map((bounty) => {
 			const tvl = calculateTvl(bounty, tokenMetadata, data);
 			const labels = indexedGithubIssues[bounty.bountyId];
