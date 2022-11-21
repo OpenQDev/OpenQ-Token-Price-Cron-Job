@@ -11,13 +11,15 @@ const getBounties = require('./getBounties');
  */
 const getAllBounties = async (pricingMetadata = pricingMetadata, bounties, environment, batchSize) => {
 	const batch = await getBounties('asc', 0, batchSize);
+	
+
 	// Filter out any GitHub Id's that are not Issues (e.g. Pull Requests)
 	const filteredBounties = filterNonIssues(batch);
 	pricingMetadata = populatePricingMetadata(filteredBounties, environment);
 
 	bounties.push(...filteredBounties);
 
-	if (batch.length === 100) {
+	if (batch === 100) {
 		await getAllBounties(pricingMetadata, bounties);
 	}
 
