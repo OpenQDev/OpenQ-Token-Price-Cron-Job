@@ -17,7 +17,7 @@ const getAllBounties = async (pricingMetadata = pricingMetadata, bounties, envir
 
 	bounties.push(...filteredBounties);
 
-	if (batch === 100) {
+	if (batch.length === 100) {
 		await getAllBounties(pricingMetadata, bounties);
 	}
 
