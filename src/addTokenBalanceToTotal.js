@@ -12,7 +12,7 @@ const addTokenBalanceToTotal = (runningTotal, tokenBalance, tokenMetadata, price
 	return newTotal;
 	}
 	catch(error){
-		console.log(error);
+		console.log("cannot find metadata for this token", tokenBalance.tokenAddress);
 		return parseFloat(runningTotal);
 
 	}
