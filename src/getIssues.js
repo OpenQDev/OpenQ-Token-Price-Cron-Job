@@ -1,16 +1,16 @@
 const axios = require('axios');
 const { GET_CATEGORY } = require("./graphql/query.js");
 
-const getIssues = async (bountyIds) => {
+const getIssues = async (bountyIds, 	startAt, skip) => {
 	let result;
-
+const currentBountyIds = bountyIds.slice(startAt, startAt + skip);
 	try {
 		result = await axios
 			.post(
 				`https://api.github.com/graphql`,
 				{
 					query: GET_CATEGORY,
-					variables: { bountyIds },
+					variables: { bountyIds: currentBountyIds },
 				},
 				{
 					headers: {

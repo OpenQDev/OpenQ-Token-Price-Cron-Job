@@ -24,8 +24,23 @@ const getContractParameters = async (bounties, pricingMetadata, data, environmen
 		return undefined;
 	};
 
-	// TODO: 
-	const { indexedGithubIssues, repositoryIds } = await getIssues(bountyIds);
+	// @FlagoJones: why does getIssues return two objects indexed by bountyId?
+
+	const startAt = 0
+
+const skip = 100
+const recursivelyGetIssues = async (startAt, skip, previouslyIndexedGithubIssues, previousRepositoryIds) => {
+	const { indexedGithubIssues, repositoryIds } = await getIssues(bountyIds, startAt, skip);
+	
+	const newIndexedGithubIssues = { ...previouslyIndexedGithubIssues, ...indexedGithubIssues };
+	const newRepositoryIds = { ...previousRepositoryIds, ...repositoryIds };
+	if (Object.keys(indexedGithubIssues).length === 100) {
+		return await recursivelyGetIssues(startAt + skip, skip, newIndexedGithubIssues, newRepositoryIds);
+	}
+	return { indexedGithubIssues: newIndexedGithubIssues, repositoryIds: newRepositoryIds };
+};
+	const { indexedGithubIssues, repositoryIds } = await recursivelyGetIssues(startAt, skip, {}, {});
+	
 	//filters for closed
 	const tvls = bounties
 		.map((bounty) => {
