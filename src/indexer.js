@@ -13,7 +13,11 @@ const indexer = async () => {
 	}
 	catch (error) {
 		// GraphQL errors at error.response.data.errors
-		console.error('An error occured: ', error);
+		if (error.code === 'ECONNREFUSED') {
+			console.error(`Unable to connect to localhost:${error.port}`);
+		} else {
+			console.error('An error occured: ', error);
+		}
 	}
 };
 
