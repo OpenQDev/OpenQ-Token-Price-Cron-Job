@@ -14,6 +14,7 @@ const updateContracts = async (tvlBodies) => {
 		const type = value.type;
 		const { organizationId, repositoryId } = value;
 		let result = null;
+		
 		try {
 			result = await axios
 				.post(
@@ -32,6 +33,7 @@ const updateContracts = async (tvlBodies) => {
 		} catch (error) {
 			// GraphQL errors at error.response.data.errors
 			console.error('error in updateTvls', error);
+			console.error('error.data.errors', error.data.errors);
 		}
 		pending.push(result.data);
 	}
