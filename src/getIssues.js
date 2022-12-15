@@ -25,7 +25,11 @@ const getIssues = async (bountyIds, 	startAt, skip) => {
 			console.log('result.data', result.data)
 		const indexedGithubIssues = {};
 		const repositoryIds = {};
-		result.data.data.nodes.map(node => {
+		
+		// remove all null values from result.data.data.nodes
+		nonNullNodes = result.data.data.nodes.filter(node => node !== null);
+
+		nonNullNodes.map(node => {
 			const issueLabels = node.labels.nodes.map(innerNode => innerNode.name.toLowerCase()).filter(label => label === "non-profit");
 			repositoryIds[node.id] = node.repository.id || null;
 			return { id: node.id, labels: issueLabels };
