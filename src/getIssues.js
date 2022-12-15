@@ -21,8 +21,6 @@ const getIssues = async (bountyIds, 	startAt, skip) => {
 
 			);
 
-			console.log('result', result)
-			console.log('result.data', result.data)
 		const indexedGithubIssues = {};
 		const repositoryIds = {};
 		
