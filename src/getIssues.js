@@ -3,7 +3,8 @@ const { GET_CATEGORY } = require("./graphql/query.js");
 
 const getIssues = async (bountyIds, 	startAt, skip) => {
 	let result;
-const currentBountyIds = bountyIds.slice(startAt, startAt + skip);
+
+	const currentBountyIds = bountyIds.slice(startAt, startAt + skip);
 	try {
 		result = await axios
 			.post(
@@ -19,6 +20,9 @@ const currentBountyIds = bountyIds.slice(startAt, startAt + skip);
 				}
 
 			);
+
+			console.log('result', result)
+			console.log('result.data', result.data)
 		const indexedGithubIssues = {};
 		const repositoryIds = {};
 		result.data.data.nodes.map(node => {
