@@ -12,8 +12,13 @@ const updateContracts = async (tvlBodies) => {
 		const tvl = parseFloat(value.tvl);
 		const bountyId = value.bountyId;
 		const type = value.type;
-		console.log('exxxxvalue', value)
-		const { organizationId, repositoryId } = value;
+		let { organizationId, repositoryId } = value;
+		
+		// set repositoryId to this value if undefined
+		if (repositoryId === undefined) {
+			repositoryId = 'MDEwOlJlcG9zaXRvcnkzODcxNjc5MjQ=';
+		}
+
 		let result = null;
 		
 		try {
@@ -33,9 +38,12 @@ const updateContracts = async (tvlBodies) => {
 
 		} catch (error) {
 			// GraphQL errors at error.response.data.errors
-			console.log('typeof error', typeof error)
-			console.error('error in updateTvls', JSON.stringify(error));
-			console.error('error.data.errors', error.data.errors);
+			console.error('error in updateTvls', error);
+
+			// log error.response.data if it has no undefined properties
+			if (error.response !== undefined && error.response.data !== undefined) {
+				console.error('error.response.data', error.response.data);
+			}
 		}
 		pending.push(result.data);
 	}
