@@ -52,6 +52,7 @@ const recursivelyGetIssues = async (startAt, skip, previouslyIndexedGithubIssues
 				address: bounty.bountyAddress,
 				bountyId: bounty.bountyId,
 				type: bounty.bountyType,
+                bountyMintTime: bounty.bountyMintTime,
 				category,
 				tvl,
 				organizationId: bounty.organization.id,

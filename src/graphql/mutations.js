@@ -15,6 +15,7 @@ const GET_ALL_BOUNTIES = `
 		bounties(skip: $skip, sortOrder: $sortOrder, quantity: $quantity, orderBy: $bountyMintTime) {
 			bountyAddress
 			bountyId
+            bountyMintTime
 			bountyType
 			organization {
 				id
@@ -36,6 +37,7 @@ const UPDATE_BOUNTY_TVL = `
 		$type: String!
 		$repositoryId: String!
 		$category: String
+        $createdAt: String
 	) {
 		updateBounty(
 			address: $address
@@ -45,6 +47,7 @@ const UPDATE_BOUNTY_TVL = `
 			bountyId: $bountyId
 			category: $category
 			repositoryId: $repositoryId
+            createdAt: $createdAt
 		) {
 			address
 		}
