@@ -7,7 +7,6 @@ const updateContracts = async (tvlBodies) => {
 	const pending = [];
 	for (let i = 0; i < tvlBodies.length; i += 1) {
 		const value = tvlBodies[i];
-        console.log(value, "tvl body")
         const createdAt = value.bountyMintTime;
 		const address = getAddress(value.address);
 		const category = value.category;
