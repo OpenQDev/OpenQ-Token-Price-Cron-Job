@@ -16,6 +16,7 @@ const GET_ALL_BOUNTIES = `
 			bountyAddress
 			bountyId
             bountyMintTime
+			externalUserId
 			bountyType
 			organization {
 				id
@@ -38,6 +39,7 @@ const UPDATE_BOUNTY_TVL = `
 		$repositoryId: String!
 		$category: String
         $createdAt: String
+		$creatingUserId: String
 	) {
 		updateBounty(
 			address: $address
@@ -48,6 +50,7 @@ const UPDATE_BOUNTY_TVL = `
 			category: $category
 			repositoryId: $repositoryId
             createdAt: $createdAt
+			creatingUserId: $creatingUserId
 		) {
 			address
 		}
