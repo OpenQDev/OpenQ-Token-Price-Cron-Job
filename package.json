@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@ethersproject/address": "5.7.0",
-    "axios": "1.3.2",
+    "axios": "1.3.3",
     "cron": "2.2.0",
     "dotenv": "16.0.3"
   },
