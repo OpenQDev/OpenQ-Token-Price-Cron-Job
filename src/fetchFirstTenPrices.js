@@ -12,7 +12,7 @@ const fetchFirstTenPrices = () => {
 			if (process.env.COINGECK_API_KEY) {
 				url = `${url}&x_cg_pro_api_key=${process.env.COINGECK_API_KEY}`;
 			}
-			console.log('url', url)
+
 			const firstTenPrices = await axios.get(url);
 			resolve(firstTenPrices.data);
 		} catch (error) {
