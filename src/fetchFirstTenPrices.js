@@ -7,7 +7,11 @@ const fetchFirstTenPrices = () => {
 		const network = 'polygon-pos';
 		const stringifiedTokens = firstTen.join(',');
 		try {
-			const firstTenPrices = await axios.get(`https://api.coingecko.com/api/v3/simple/token_price/${network}?contract_addresses=${stringifiedTokens}&vs_currencies=usd`);
+			let url = `https://api.coingecko.com/api/v3/simple/token_price/${network}?contract_addresses=${stringifiedTokens}&vs_currencies=usd`;
+			if (process.env.COINGECK_API_KEY) {
+				url = `${url}&x_cg_pro_api_key=${process.env.COINGECK_API_KEY}`;
+			}
+			const firstTenPrices = await axios.get(url);
 			resolve(firstTenPrices.data);
 		} catch (error) {
 			reject(`Error fetching OpenQ Local Tokens: ${error}`,);
