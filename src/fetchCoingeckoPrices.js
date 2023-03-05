@@ -8,6 +8,7 @@ const fetchCoingeckoPrices = async (pricingMetadata) => {
   if (process.env.COINGECK_API_KEY) {
     url = `${url}&x_cg_pro_api_key=${process.env.COINGECK_API_KEY}`;
   }
+	console.log('url', url)
 
 	const { data } = await axios.get(url);
 	return data;
