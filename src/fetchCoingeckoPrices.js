@@ -10,7 +10,7 @@ const fetchCoingeckoPrices = async (pricingMetadata) => {
   }
 
 	const { data } = await axios.get(url);
-	return data;
+	return  { ...data, '0x2791bca1f2de4661ed88a30c99a7a9449aa84174': { usd: 1 } };
 };
 
 module.exports = fetchCoingeckoPrices;

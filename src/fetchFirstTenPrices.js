@@ -13,8 +13,10 @@ const fetchFirstTenPrices = () => {
 				url = `${url}&x_cg_pro_api_key=${process.env.COINGECK_API_KEY}`;
 			}
 
-			const firstTenPrices = await axios.get(url);
-			resolve(firstTenPrices.data);
+			const {data} = await axios.get(url);
+			resolve(
+				{ ...data, '0x2791bca1f2de4661ed88a30c99a7a9449aa84174': { usd: 1 } });
+	
 		} catch (error) {
 			reject(`Error fetching OpenQ Local Tokens: ${error}`,);
 		}
