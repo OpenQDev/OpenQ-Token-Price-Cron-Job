@@ -15,7 +15,7 @@ const fetchFirstTenPrices = () => {
 
 			const {data} = await axios.get(url);
 			resolve(
-				{ ...data, '0x2791bca1f2de4661ed88a30c99a7a9449aa84174': { usd: 1 } });
+				{ ...data, '0x2791bca1f2de4661ed88a30c99a7a9449aa84174': { usd: 1 }, "0xc2132D05D31c914a87C6611C10748AEb04B58e8F": { usd: 1 } });
 	
 		} catch (error) {
 			reject(`Error fetching OpenQ Local Tokens: ${error}`,);
