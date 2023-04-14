@@ -3,7 +3,8 @@ const { GET_CATEGORY } = require("./graphql/query.js");
 
 const getIssues = async (bountyIds, 	startAt, skip) => {
 	let result;
-
+	const patsArray = process.env.PATS.split(',');
+	const token = patsArray[Math.floor(Math.random() * patsArray.length)];
 	const currentBountyIds = bountyIds.slice(startAt, startAt + skip);
 	try {
 		result = await axios
@@ -15,7 +16,7 @@ const getIssues = async (bountyIds, 	startAt, skip) => {
 				},
 				{
 					headers: {
-						Authorization: `Bearer ${process.env.PAT}`,
+						Authorization: `Bearer ${token}`,
 					},
 				}
 
