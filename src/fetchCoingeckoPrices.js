@@ -1,6 +1,7 @@
 const axios = require('axios');
 
 const fetchCoingeckoPrices = async (pricingMetadata) => {
+	console.log(pricingMetadata)
 	const network = 'polygon-pos';
 	const commaDelimitedTokenAddresses = pricingMetadata.map((metadata) => metadata.address).join(',');
 	
@@ -14,6 +15,7 @@ const fetchCoingeckoPrices = async (pricingMetadata) => {
 	const usdtPrice = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
 	if(data[usdcAddress]) data[usdcAddress] =  { usd: 1 };
 	if( data[usdtPrice]) data[usdtPrice] =  { usd: 1 };
+	console.log(data, "my data")
 	return  data
 };
 

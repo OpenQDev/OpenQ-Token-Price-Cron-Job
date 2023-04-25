@@ -1,5 +1,6 @@
 const { getAddress } = require('@ethersproject/address');
 const axios = require('axios');
+const getBudgetTokenBalance = require('./utils/getBudgetTokenBalance');
 
 const { UPDATE_BOUNTY_TVL } = require('./graphql/mutations');
 
@@ -7,6 +8,7 @@ const updateContracts = async (tvlBodies) => {
 	const pending = [];
 	for (let i = 0; i < tvlBodies.length; i += 1) {
 		const value = tvlBodies[i];
+		console.log(value)
         const createdAt = value.bountyMintTime;
 		const creatingUserId = value.externalUserId;
 		const address = getAddress(value.address);
@@ -14,7 +16,14 @@ const updateContracts = async (tvlBodies) => {
 		const bountyId = value.bountyId;
 		const type = value.type;
 		let { organizationId, repositoryId, title } = value;
+		const budgetData = {
+			
+			tierVolumes: value.payoutSchedule,
+			payoutTokenAddress: value.payoutTokenAddress,
 		
+			fundingGoalTokenAddress: value.fundingGoalTokenAddress,
+			fundingGoalBigNumberVolumeInWei: value.fundingGoalVolume,
+		}
 		// set repositoryId to this value if undefined
 		if (repositoryId === undefined) {
 			repositoryId = 'MDEwOlJlcG9zaXRvcnkzODcxNjc5MjQ=';

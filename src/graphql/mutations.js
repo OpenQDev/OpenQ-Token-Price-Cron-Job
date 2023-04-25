@@ -16,7 +16,11 @@ const GET_ALL_BOUNTIES = `
 			bountyAddress
 			bountyId
             bountyMintTime
-			externalUserId
+			externalUserId			
+			fundingGoalVolume
+			fundingGoalTokenAddress
+			payoutSchedule
+			payoutTokenAddress
 			bountyType
 			organization {
 				id
