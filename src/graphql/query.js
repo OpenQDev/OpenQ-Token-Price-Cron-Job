@@ -2,6 +2,7 @@ const GET_CATEGORY = `query ($bountyIds: [ID!]!) {
   nodes(ids: $bountyIds) {
     ... on Issue {
 			id
+      title
 			repository {
         id
       }

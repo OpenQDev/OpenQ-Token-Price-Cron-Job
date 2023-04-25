@@ -37,17 +37,17 @@ const UPDATE_BOUNTY_TVL = `
 		$bountyId: String!
 		$type: String!
 		$repositoryId: String!
-		$category: String
         $createdAt: String
 		$creatingUserId: String
+		$title: String
 	) {
 		updateBounty(
 			address: $address
+			title: $title
 			type: $type
 			tvl: $tvl
 			organizationId: $organizationId
 			bountyId: $bountyId
-			category: $category
 			repositoryId: $repositoryId
             createdAt: $createdAt
 			creatingUserId: $creatingUserId

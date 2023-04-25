@@ -17,45 +17,38 @@ const getContractParameters = async (bounties, pricingMetadata, data, environmen
 	const bountyIds = bounties.map(bounty => {
 		return bounty.bountyId;
 	});
-	const getCategory = (labels) => {
-		if (labels?.includes("non-profit")) {
-			return "non-profit";
-		}
-		return undefined;
-	};
 
-	// @FlagoJones: why does getIssues return two objects indexed by bountyId?
 
 	const startAt = 0
 
 const skip = 100
-const recursivelyGetIssues = async (startAt, skip, previouslyIndexedGithubIssues, previousRepositoryIds) => {
-	const { indexedGithubIssues, repositoryIds } = await getIssues(bountyIds, startAt, skip);
+const recursivelyGetIssues = async (startAt, skip, previouslyFetchedIssues) => {
+	const issues = await getIssues(bountyIds, startAt, skip);
 	
-	const newIndexedGithubIssues = { ...previouslyIndexedGithubIssues, ...indexedGithubIssues };
-	const newRepositoryIds = { ...previousRepositoryIds, ...repositoryIds };
-	if (Object.keys(indexedGithubIssues).length === 100) {
-		return await recursivelyGetIssues(startAt + skip, skip, newIndexedGithubIssues, newRepositoryIds);
+	const newIssues = { ...previouslyFetchedIssues, ...issues };
+	if (issues.length === 100) {
+		return await recursivelyGetIssues(startAt + skip, skip,newIssues);
 	}
-	return { indexedGithubIssues: newIndexedGithubIssues, repositoryIds: newRepositoryIds };
+	return newIssues;
 };
-	const { indexedGithubIssues, repositoryIds } = await recursivelyGetIssues(startAt, skip, {}, {});
+	const newIssues = await recursivelyGetIssues(startAt, skip, []);
 	
 	//filters for closed
 	const tvls = bounties
 		.map((bounty) => {
 			const tvl = calculateTvl(bounty, tokenMetadata, data);
-			const labels = indexedGithubIssues[bounty.bountyId];
-			const repositoryId = repositoryIds[bounty.bountyId];
-			const category = getCategory(labels, bounty.bountyType);
+			const labels = newIssues[bounty.bountyId].labels;
+			const title = newIssues[bounty.bountyId].title;
+			const repositoryId = newIssues[bounty.bountyId].repositoryId;
 			return {
 				address: bounty.bountyAddress,
 				bountyId: bounty.bountyId,
 				type: bounty.bountyType,
                 bountyMintTime: bounty.bountyMintTime,
 				externalUserId: bounty.externalUserId,
-				category,
 				tvl,
+				labels,
+				title,
 				organizationId: bounty.organization.id,
 				repositoryId
 			};

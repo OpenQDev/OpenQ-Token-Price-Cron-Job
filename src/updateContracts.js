@@ -10,11 +10,10 @@ const updateContracts = async (tvlBodies) => {
         const createdAt = value.bountyMintTime;
 		const creatingUserId = value.externalUserId;
 		const address = getAddress(value.address);
-		const category = value.category;
 		const tvl = parseFloat(value.tvl);
 		const bountyId = value.bountyId;
 		const type = value.type;
-		let { organizationId, repositoryId } = value;
+		let { organizationId, repositoryId, title } = value;
 		
 		// set repositoryId to this value if undefined
 		if (repositoryId === undefined) {
@@ -29,7 +28,7 @@ const updateContracts = async (tvlBodies) => {
 					`${process.env.OPENQ_API_URL}/graphql`,
 					{
 						query: UPDATE_BOUNTY_TVL,
-						variables: { address, tvl, organizationId, bountyId, type, repositoryId, category, createdAt, creatingUserId },
+						variables: { address, tvl, organizationId, bountyId, type, repositoryId, createdAt, creatingUserId, title },
 					},
 					{
 						headers: {
