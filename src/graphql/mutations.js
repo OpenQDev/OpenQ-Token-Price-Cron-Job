@@ -16,7 +16,11 @@ const GET_ALL_BOUNTIES = `
 			bountyAddress
 			bountyId
             bountyMintTime
-			externalUserId
+			externalUserId			
+			fundingGoalVolume
+			fundingGoalTokenAddress
+			payoutSchedule
+			payoutTokenAddress
 			bountyType
 			organization {
 				id
@@ -33,21 +37,23 @@ const UPDATE_BOUNTY_TVL = `
 	mutation Mutation(
 		$address: String!
 		$tvl: Float
+		$budget: Float
 		$organizationId: String!
 		$bountyId: String!
 		$type: String!
 		$repositoryId: String!
-		$category: String
         $createdAt: String
 		$creatingUserId: String
+		$title: String
 	) {
 		updateBounty(
 			address: $address
+			title: $title
 			type: $type
 			tvl: $tvl
+			budgetValue: $budget
 			organizationId: $organizationId
 			bountyId: $bountyId
-			category: $category
 			repositoryId: $repositoryId
             createdAt: $createdAt
 			creatingUserId: $creatingUserId
