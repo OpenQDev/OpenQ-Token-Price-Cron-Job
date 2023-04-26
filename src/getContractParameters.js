@@ -42,7 +42,7 @@ const getContractParameters = async (
   const newIssues = await recursivelyGetIssues(startAt, skip, []);
 
   //filters for closed
-  const tvls = bounties.map((bounty) => {
+  const tvls = bounties.filter(bounty=>newIssues[bounty.bountyId]).map((bounty) => {
     const tvl = calculateTvl(bounty, tokenMetadata, data);
 
 
