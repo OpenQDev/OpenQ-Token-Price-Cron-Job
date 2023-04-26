@@ -37,6 +37,7 @@ const UPDATE_BOUNTY_TVL = `
 	mutation Mutation(
 		$address: String!
 		$tvl: Float
+		$budget: Float
 		$organizationId: String!
 		$bountyId: String!
 		$type: String!
@@ -50,6 +51,7 @@ const UPDATE_BOUNTY_TVL = `
 			title: $title
 			type: $type
 			tvl: $tvl
+			budgetValue: $budget
 			organizationId: $organizationId
 			bountyId: $bountyId
 			repositoryId: $repositoryId

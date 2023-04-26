@@ -1,5 +1,6 @@
 const getBudgetTokenBalance = require("./utils/getBudgetTokenBalance");
 const calculateTvl = require("./calculateTvl");
+const calculateBudget = require("./calculateBudget");
 const getIssues = require("./getIssues");
 const getTokenMetadata = require("./utils/getTokenMetadata");
 
@@ -43,15 +44,16 @@ const getContractParameters = async (
   //filters for closed
   const tvls = bounties.map((bounty) => {
     const tvl = calculateTvl(bounty, tokenMetadata, data);
-console.log('tvl', bounty, data);
-    const { budgetTokenAddress, volume } = getBudgetTokenBalance(
-      budgetData,
-      type
-    );
+
+
+    const budget = calculateBudget(bounty, tokenMetadata, data);
+    console.log(budget, "budget")
+    
     const labels = newIssues[bounty.bountyId].labels;
     const title = newIssues[bounty.bountyId].title;
     const repositoryId = newIssues[bounty.bountyId].repositoryId;
     return {
+      budget,
       address: bounty.bountyAddress,
       bountyId: bounty.bountyId,
       type: bounty.bountyType,

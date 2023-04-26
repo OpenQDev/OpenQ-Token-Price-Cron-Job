@@ -1,6 +1,5 @@
 const { getAddress } = require('@ethersproject/address');
 const axios = require('axios');
-const getBudgetTokenBalance = require('./utils/getBudgetTokenBalance');
 
 const { UPDATE_BOUNTY_TVL } = require('./graphql/mutations');
 
@@ -8,22 +7,15 @@ const updateContracts = async (tvlBodies) => {
 	const pending = [];
 	for (let i = 0; i < tvlBodies.length; i += 1) {
 		const value = tvlBodies[i];
-		console.log(value)
         const createdAt = value.bountyMintTime;
 		const creatingUserId = value.externalUserId;
 		const address = getAddress(value.address);
 		const tvl = parseFloat(value.tvl);
 		const bountyId = value.bountyId;
 		const type = value.type;
+		const budget = parseFloat(value.budget||0);
 		let { organizationId, repositoryId, title } = value;
-		const budgetData = {
-			
-			tierVolumes: value.payoutSchedule,
-			payoutTokenAddress: value.payoutTokenAddress,
-		
-			fundingGoalTokenAddress: value.fundingGoalTokenAddress,
-			fundingGoalBigNumberVolumeInWei: value.fundingGoalVolume,
-		}
+	
 		// set repositoryId to this value if undefined
 		if (repositoryId === undefined) {
 			repositoryId = 'MDEwOlJlcG9zaXRvcnkzODcxNjc5MjQ=';
@@ -37,7 +29,7 @@ const updateContracts = async (tvlBodies) => {
 					`${process.env.OPENQ_API_URL}/graphql`,
 					{
 						query: UPDATE_BOUNTY_TVL,
-						variables: { address, tvl, organizationId, bountyId, type, repositoryId, createdAt, creatingUserId, title },
+						variables: { address, tvl, organizationId, bountyId, type, repositoryId, createdAt, creatingUserId, title, budget },
 					},
 					{
 						headers: {
