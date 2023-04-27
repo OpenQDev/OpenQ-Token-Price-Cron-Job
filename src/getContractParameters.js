@@ -39,19 +39,22 @@ const getContractParameters = async (
     }
     return newIssues;
   };
-  const newIssues = await recursivelyGetIssues(startAt, skip, []);
+  let newIssues;
+
+  newIssues = await recursivelyGetIssues(startAt, skip, []);
 
   //filters for closed
-  const tvls = bounties.filter(bounty=>newIssues[bounty.bountyId]).map((bounty) => {
+  const tvls = bounties.map((bounty) => {
     const tvl = calculateTvl(bounty, tokenMetadata, data);
 
-
     const budget = calculateBudget(bounty, tokenMetadata, data);
-    console.log(budget, "budget")
-    
-    const labels = newIssues[bounty.bountyId].labels;
-    const title = newIssues[bounty.bountyId].title;
-    const repositoryId = newIssues[bounty.bountyId].repositoryId;
+    let labels, title
+    let repositoryId = "";
+    if (newIssues[bounty.bountyId]) {
+      labels = newIssues[bounty.bountyId].labels;
+      title = newIssues[bounty.bountyId].title;
+      repositoryId = newIssues[bounty.bountyId].repositoryId;
+    }
     return {
       budget,
       address: bounty.bountyAddress,

@@ -19,7 +19,11 @@ const getIssues = async (bountyIds, startAt, skip) => {
         },
       }
     );
-
+  
+if(result.data.errors){
+  console.log(result.data.errors)
+  throw new Error(result.data.errors[0].message);
+}
     // remove all null values from result.data.data.nodes
     nonNullNodes = result.data.data.nodes.filter((node) => node !== null);
     const indexedIssues = {};
