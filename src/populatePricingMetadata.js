@@ -11,7 +11,7 @@ const pushAddressToArray = (address, array, openQMetadata) => {
   const notPresentInMetadataAndInOpenQData = !array.includes(address);
   if (notPresentInMetadataAndInOpenQData && metadataByChecksum) {
     array.push(metadataByChecksum);
-  } else if (metadataByLowerCase) {
+  } else if (notPresentInMetadataAndInOpenQData && metadataByLowerCase) {
     array.push(metadataByLowerCase);
   }
 };
