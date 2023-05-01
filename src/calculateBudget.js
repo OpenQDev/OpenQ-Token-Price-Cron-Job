@@ -37,7 +37,7 @@ const calculateBudget = (bounty, tokenMetadata, priceData) => {
 	const currentMetadata = tokenMetadata[checksummedTokenAddress] || polygonMetadata[lowerCaseTokenAddress];
 	const multiplier = volume / 10 ** currentMetadata.decimals;
 	const price = priceData[currentMetadata.address.toLowerCase()];
-	return  price.usd * multiplier;
+	return  1 * multiplier;
 };
 
 module.exports = calculateBudget;

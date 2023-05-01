@@ -8,7 +8,7 @@ const addTokenBalanceToTotal = (runningTotal, tokenBalance, tokenMetadata, price
 	const currentMetadata = tokenMetadata[checksummedTokenAddress] || polygonMetadata[lowerCaseTokenAddress];
 	const multiplier = tokenBalance.volume / 10 ** currentMetadata.decimals;
 	const price = priceData[currentMetadata.address.toLowerCase()];
-	const newTotal = price.usd * multiplier + parseFloat(runningTotal);
+	const newTotal = 1 * multiplier + parseFloat(runningTotal);
 	return newTotal;
 	}
 	catch(error){
