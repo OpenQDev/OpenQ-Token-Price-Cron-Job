@@ -2,7 +2,13 @@ const axios = require('axios');
 
 const fetchCoingeckoPrices = async (pricingMetadata) => {
 	const network = 'polygon-pos';
-	const commaDelimitedTokenAddresses = pricingMetadata.map((metadata) => metadata.address).join(',');
+	const nonDupedAddresses =  pricingMetadata.map((metadata) => metadata.address).pricingMetadata.reduce((acc, metadata) => {
+		if (!acc.includes(metadata.address)) {
+			acc.push(metadata.address);
+		}
+		return acc;
+	}, []);
+	const commaDelimitedTokenAddresses = nonDupedAddresses.join(',');
 	
 	let url = `https://api.coingecko.com/api/v3/simple/token_price/${network}?contract_addresses=${commaDelimitedTokenAddresses}&vs_currencies=usd`;
   if (process.env.COINGECK_API_KEY) {
