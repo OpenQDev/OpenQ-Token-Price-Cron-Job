@@ -10,6 +10,8 @@ const pushAddressToArray = (address, array, openQMetadata) => {
   const lowerCaseAddress = address.toLowerCase();
   const metadataByLowerCase = polygonMetadata[lowerCaseAddress];
   
+  const notPresentInMetadataAndInOpenQData = !array.includes(address);
+  
   if (notPresentInMetadataAndInOpenQData && metadataByChecksum) {
     array.push(metadataByChecksum);
   } else if (metadataByLowerCase) {
