@@ -3,15 +3,16 @@ const { getAddress } = require("@ethersproject/address");
 const getMetadata = require("./utils/getTokenMetadata");
 
 const pushAddressToArray = (address, array, openQMetadata) => {
+
 	if(!address) return
   const checksummedAddress = getAddress(address);
   const metadataByChecksum = openQMetadata[checksummedAddress];
   const lowerCaseAddress = address.toLowerCase();
   const metadataByLowerCase = polygonMetadata[lowerCaseAddress];
-  const notPresentInMetadataAndInOpenQData = !array.includes(address);
+  
   if (notPresentInMetadataAndInOpenQData && metadataByChecksum) {
     array.push(metadataByChecksum);
-  } else if (notPresentInMetadataAndInOpenQData && metadataByLowerCase) {
+  } else if (metadataByLowerCase) {
     array.push(metadataByLowerCase);
   }
 };
