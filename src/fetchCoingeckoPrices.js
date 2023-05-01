@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const fetchCoingeckoPrices = async (pricingMetadata) => {
 	const network = 'polygon-pos';
-	const nonDupedAddresses =  pricingMetadata.map((metadata) => metadata.address).pricingMetadata.reduce((acc, metadata) => {
+	const nonDupedAddresses =  pricingMetadata.map((metadata) => metadata.address).reduce((acc, metadata) => {
 		if (!acc.includes(metadata.address)) {
 			acc.push(metadata.address);
 		}
