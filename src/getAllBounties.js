@@ -21,7 +21,6 @@ const getAllBounties = async (pricingMetadata = pricingMetadata, bounties=[], en
 	}
 
 	pricingMetadata = populatePricingMetadata(bounties, environment);
-	console.log(pricingMetadata)
 	return { pricingMetadata, bounties };
 };
 
