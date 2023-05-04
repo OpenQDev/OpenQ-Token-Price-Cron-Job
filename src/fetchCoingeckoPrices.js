@@ -2,12 +2,11 @@ const axios = require('axios');
 
 const fetchCoingeckoPrices = async (pricingMetadata) => {
 	const network = 'polygon-pos';
-	const nonDupedAddresses =  pricingMetadata.map((metadata) => metadata.address).reduce((acc, address) => {
-		if (!acc.includes(address)) {
-			acc.push(address.toLowerCase());
-		}
-		return acc;
-	}, []);
+	function removeDuplicates(arr) {
+		return [...new Set(arr)];
+	  }
+	const addresses =  pricingMetadata.map((metadata) => metadata.address);
+	const nonDupedAddresses = removeDuplicates(addresses);
 	console.log(nonDupedAddresses)
 	const commaDelimitedTokenAddresses = nonDupedAddresses.join(',');
 	
