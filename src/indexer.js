@@ -9,7 +9,6 @@ const indexer = async () => {
 		const updateTopTenResult = await updateTopTenPrices();
 		console.log(updateTopTenResult?.data);
 		const tvls = await fetchContractParameters(process.env.DEPLOY_ENV, 100);
-		console.log(JSON.stringify(tvls))
 		const updateTvlsResult = await updateContracts(tvls);
 	}
 	catch (error) {
