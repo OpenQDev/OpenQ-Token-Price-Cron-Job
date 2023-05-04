@@ -34,8 +34,8 @@ const getContractParameters = async (
     const issues = await getIssues(bountyIds, startAt, skip);
 
     const newIssues = { ...previouslyFetchedIssues, ...issues };
-    console.log(issues.length, "issues length")
-    if (issues.length === 100) {
+    console.log(Object.keys(issues).length, "issues length")
+    if (Object.keys(issues).length === 100) {
       return await recursivelyGetIssues(startAt + skip, skip, newIssues);
     }
     else{
