@@ -8,6 +8,7 @@ const fetchCoingeckoPrices = async (pricingMetadata) => {
 		}
 		return acc;
 	}, []);
+	console.log(nonDupedAddresses)
 	const commaDelimitedTokenAddresses = nonDupedAddresses.join(',');
 	
 	let url = `https://api.coingecko.com/api/v3/simple/token_price/${network}?contract_addresses=${commaDelimitedTokenAddresses}&vs_currencies=usd`;
