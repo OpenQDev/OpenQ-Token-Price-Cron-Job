@@ -6,6 +6,8 @@ const getIssues = async (bountyIds, startAt, skip) => {
   const patsArray = process.env.PATS.split(",");
   const token = patsArray[Math.floor(Math.random() * patsArray.length)];
   const currentBountyIds = bountyIds.slice(startAt, startAt + skip);
+  console.log(currentBountyIds, "current ids")
+  console.log( startAt, skip, "pagination vars")
   try {
     result = await axios.post(
       `https://api.github.com/graphql`,
