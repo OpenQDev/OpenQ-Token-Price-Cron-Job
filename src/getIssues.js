@@ -34,6 +34,7 @@ if(result.data.errors){
         repositoryId: node.repository.id,
       };
     });
+    console.log(indexedIssues)
     return indexedIssues;
   } catch (error) {
     // GraphQL errors at error.response.data.errors
