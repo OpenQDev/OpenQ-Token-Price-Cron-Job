@@ -17,7 +17,7 @@ const updateContracts = async (tvlBodies) => {
 		let { organizationId, repositoryId, title } = value;
 	
 		// set repositoryId to this value if undefined
-		if (repositoryId === undefined) {
+		if (!repositoryId) {
 			repositoryId = 'MDEwOlJlcG9zaXRvcnkzODcxNjc5MjQ=';
 		}
 
